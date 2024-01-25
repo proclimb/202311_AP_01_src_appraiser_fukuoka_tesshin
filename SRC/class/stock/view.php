@@ -154,14 +154,14 @@ function subStockView($param)
 				while ($row = mysqli_fetch_array($res)) {
 					$stockNo     = htmlspecialchars($row[0]);
 					$charge      = htmlspecialchars($row[1]);
-					$rank        = fnRankName(htmlspecialchars($row[2] - 1));
+					$rank        = fnRankName(htmlspecialchars($row[2] - 0));
 					$insDT       = htmlspecialchars($row[3]);
 					$article     = htmlspecialchars($row[4]);
 					$articleFuri = htmlspecialchars($row[5]);
 					$room        = htmlspecialchars($row[6]);
 					$area        = htmlspecialchars($row[7]);
 					$station     = htmlspecialchars($row[8]);
-					$distance    = fnRankName(htmlspecialchars($row[9] - 1));
+					$distance    = fnRankName(htmlspecialchars($row[9] + 0));
 					$agent       = htmlspecialchars($row[10]);
 					$store       = htmlspecialchars($row[11]);
 					$cover       = htmlspecialchars($row[12]);
@@ -293,7 +293,7 @@ function subStockEditView($param)
 					<?php
 					for ($i = 0; $i < 4; $i++) {
 					?>
-						<input type="radio" name="distance" value="<?php print $i1; ?>" <?php if ($param["distance"] == $i) print ' checked="checked"'; ?> /> <?php print fnDistanceName($i); ?>
+						<input type="radio" name="distance" value="<?php print $i; ?>" <?php if ($param["distance"] == $i) print ' checked="checked"'; ?> /> <?php print fnDistanceName($i); ?>
 					<?php
 					}
 					?>
