@@ -34,7 +34,7 @@ function fnSqlStockList($flg, $param)
         $flg = 0;
         foreach ($param["sRank"] as $value) {
             if ($flg == 0) {
-                $value = 1;
+                $flg = 1;
             } else {
                 $where .= " OR ";
             }

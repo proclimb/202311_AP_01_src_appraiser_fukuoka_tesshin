@@ -45,9 +45,11 @@ function subStockView($param)
 							<input type="checkbox" name="sDistance[]" value="<?php print $i + 1; ?>" <?php for ($j = 0; $j < 4; $j++) {
 																											if ($param["sDistance"][$j] == $i + 1) print ' checked="checked"';
 																										} ?> /> <?php print fnRankName($i) ?>
+
 						<?php
 						}
 						?>
+
 					</td>
 				</tr>
 				<tr>
@@ -64,10 +66,11 @@ function subStockView($param)
 						?>
 							<input type="checkbox" name="sRank[]" value="<?php print $i + 1; ?>" <?php for ($j = 0; $j < 5; $j++) {
 																										if ($param["sRank"][$j] == $i + 1) print ' checked="checked"';
-																									} ?> /> <?php print fnRankName($i) ?>
+																									} ?> /> <?php print fnRankName($i); ?>
 						<?php
 						}
 						?>
+
 					</td>
 					<th>店舗名</th>
 					<td><input type="text" name="sStore" value="<?php print $param["sStore"] ?>" size="30" /></td>
@@ -154,14 +157,14 @@ function subStockView($param)
 				while ($row = mysqli_fetch_array($res)) {
 					$stockNo     = htmlspecialchars($row[0]);
 					$charge      = htmlspecialchars($row[1]);
-					$rank        = fnRankName(htmlspecialchars($row[2] - 0));
+					$rank        = fnRankName(htmlspecialchars($row[2] - 1));
 					$insDT       = htmlspecialchars($row[3]);
 					$article     = htmlspecialchars($row[4]);
 					$articleFuri = htmlspecialchars($row[5]);
 					$room        = htmlspecialchars($row[6]);
 					$area        = htmlspecialchars($row[7]);
 					$station     = htmlspecialchars($row[8]);
-					$distance    = fnRankName(htmlspecialchars($row[9] - 0));
+					$distance    = fnRankName(htmlspecialchars($row[9] - 1));
 					$agent       = htmlspecialchars($row[10]);
 					$store       = htmlspecialchars($row[11]);
 					$cover       = htmlspecialchars($row[12]);
@@ -259,13 +262,19 @@ function subStockEditView($param)
 				<th>ランク</th>
 				<td>
 					<?php
+					if (!$param["stockNo"]) {
+						$param["rank"] = 1;
+					}
 					for ($i = 0; $i < 5; $i++) {
+						$check = '';
+						if (($param["rank"] - 1) == $i) {
+							$check = 'checked = "checked"';
+						}
 					?>
-						<input type="radio" name="rank" value="<?php print $i; ?>" <?php if ($param["rank"] == $i) print ' checked="checked"'; ?> /> <?php print fnRankName($i); ?>
+						<input type="radio" name="rank" value="<?php print $i + 1; ?>" <?php print $check; ?> /> <?php print fnRankName($i); ?>
 					<?php
 					}
 					?>
-				</td>
 			</tr>
 			<tr>
 				<th>物件名<span class="red">（必須）</span></th>
@@ -291,9 +300,16 @@ function subStockEditView($param)
 				<th>距離</th>
 				<td>
 					<?php
+					if (!$param["stockNo"]) {
+						$param["Distance"] = 1;
+					}
 					for ($i = 0; $i < 4; $i++) {
+						$check = '';
+						if (($param["Distance"] - 1) == $i) {
+							$check = 'checked = "checked"';
+						}
 					?>
-						<input type="radio" name="distance" value="<?php print $i; ?>" <?php if ($param["distance"] == $i) print ' checked="checked"'; ?> /> <?php print fnDistanceName($i); ?>
+						<input type="radio" name="distance" value="<?php print $i + 1; ?>" <?php if ($param["distance"] == $i) print ' checked="checked"'; ?> /> <?php print fnDistanceName($i); ?>
 					<?php
 					}
 					?>
@@ -329,12 +345,19 @@ function subStockEditView($param)
 			</tr>
 			<tr>
 				<th>仕入経緯</th>
-				<td>
-					<?php
+				<td><?php
+					if (!$param["stockNo"]) {
+						$param["How"] = 1;
+					}
 					for ($i = 0; $i < 6; $i++) {
+						$check = '';
+						if (($param["How"] - 1) == $i) {
+							$check = 'checked = "checked"';
+						}
 					?>
+
 						<br />
-						<input type="radio" name="how" value="<?php print $i; ?>" <?php if ($param["how"] == $i) print ' checked="checked"'; ?> /> <?php print fnHowName($i); ?>
+						<input type="radio" name="how" value="<?php print $i + 1; ?>" <?php if ($param["how"] == $i) print ' checked="checked"'; ?> /> <?php print fnHowName($i); ?>
 					<?php
 					}
 					?>
