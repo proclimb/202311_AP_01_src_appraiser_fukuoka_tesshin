@@ -100,8 +100,6 @@ function fnSqlArticleInsert($articleNo, $article, $room, $keyPlace, $address, $a
 
 	return ($sql);
 }
-
-
 //
 //物件管理情報削除
 //
