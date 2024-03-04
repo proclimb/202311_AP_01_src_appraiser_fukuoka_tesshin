@@ -191,7 +191,7 @@ function subArticleEdit()
 		$btnImage = 'btn_enter.png';
 	}
 
-	subMenu2();
+	subMenu();
 ?>
 	<script type="text/javascript" src="./js/article.js"></script>
 
@@ -313,8 +313,8 @@ function subArticleEditComplete()
 
 		$res = mysqli_query($conn, $sql);
 
-		/* $sql = fnSqlFManagerInsert(fnNextNo('FM'),$article,$room,$articleNote,$del);
-		   $res = mysqli_query($conn,$sql); */
+		$sql = fnSqlFManagerInsert(fnNextNo('FM'), $article, $room, $articleNote, $del);
+		$res = mysqli_query($conn, $sql);
 	}
 
 	$_REQUEST['act'] = 'articleSearch';
